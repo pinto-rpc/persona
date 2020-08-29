@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/personas', 'PersonController@index');
+Route::post('/personas', 'PersonController@store')->name('persons.store');
+Route::get('/personas/edit/{id}', 'PersonaController@editView')->name('persons.editview');
+Route::post('personas/{id}', 'PersonController@edit')->name('persons.edit');
+Route::delete('/personas/{id}', 'PersonController@destroy')->name('persons.destroy');
