@@ -11,11 +11,25 @@ class PersonController extends Controller
 
     }
 
-    public function index(){
-        return 'hola';
+    public function index(Request $request){
+
+        $persons = $request->user()->persons()->orderBy('created_at', 'desc')->get();
+        return view('person.index', ['persons' => $persons]);
     }
 
-    public function store(){
+    public function store(Request $request){
+
+        $this->validate($request, [
+            'name' => 'required | max:255',
+            'lastname' => 'required | max:255'
+        ]);
+
+        $request->user()->persons()->create([
+            'name' => $request->name,
+            'lastname' => $request->lastname
+        ]);
+
+        return redirect('/personas');
 
     }
 
