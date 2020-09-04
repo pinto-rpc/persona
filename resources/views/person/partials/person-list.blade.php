@@ -16,7 +16,15 @@
             <th scope="row">{{$person->id}}</th>
             <td>{{$person->name}}</td>
             <td>{{$person->lastname}}</td>
-            <td>Acciones</td>
+            <td>
+            <form method="POST" action="{{ route('persons.destroy', [$person->id]) }}">
+              @csrf
+              {{ method_field('DELETE')}}
+              <button type="sumit" class="btn btn-danger">
+                Eliminar
+              </button>
+            </form>
+            </td>
           </tr>
           @endforeach
         </tbody>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Person;
 
 class PersonController extends Controller
 {
@@ -41,7 +42,15 @@ class PersonController extends Controller
 
     }
 
-    public function destroy(){
+    public function destroy($id){
         
+        $person = Person::find($id);
+        
+        if(empty($person)){
+            return redirect('/personas');
+        }
+         $person->delete();
+         return redirect('/personas');
+    
     }
 }
