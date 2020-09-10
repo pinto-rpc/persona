@@ -34,11 +34,38 @@ class PersonController extends Controller
 
     }
 
-    public function editView(){
+    public function editView($id){
+        
+        $person = Person::find($id);
+
+        if (empty($person)) {
+            return redirect('/personas');
+        }
+
+        return view('person.edit', ['person' => $person]);
+
+
 
     }
 
-    public function edit(){
+    public function edit(Request $request, $id){
+
+        $this->validate($request, [
+            'name' => 'required | max:255',
+            'lastname' => 'required | max:255'
+        ]);
+
+        $person = Person::find($id);
+
+        if(empty($person)){
+            return redirect('/personas');
+        }
+
+        $person->name = $request->name;
+        $person->lastname = $request->lastname;
+        $person->save();
+
+        return redirect('/personas');
 
     }
 

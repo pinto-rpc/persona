@@ -16,7 +16,10 @@
             <th scope="row">{{$person->id}}</th>
             <td>{{$person->name}}</td>
             <td>{{$person->lastname}}</td>
-            <td>
+            <td style="display: flex">
+            <a class="btn btn-info" href="{{ route('persons.editview', [$person->id])}}" style="margin-right: 5px">
+                  Editar
+              </a>
             <form method="POST" action="{{ route('persons.destroy', [$person->id]) }}">
               @csrf
               {{ method_field('DELETE')}}
